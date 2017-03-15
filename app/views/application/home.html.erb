@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome. Brandeis University course catalog - Rails App for COSI166b Samuel Akerman</h1>
+
+<div>
+  <body>
+ <p> If you have an account, please log in. </p>
+  <p>Otherwise, create an <a <%= link_to 'new account', new_user_path %></a> to access the catalog.</p>
+  </body>
+</div>
+<%= link_to 'New User', new_user_path %>
