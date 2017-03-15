@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   wrap_parameters :user, include: [:name, :last_name, :username,:email, :password, :password_confirmation]
+  include SessionsHelper
 
   # GET /users
   # GET /users.json
@@ -28,7 +29,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        log_in @user
+        format.html { redirect_to '/'}
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

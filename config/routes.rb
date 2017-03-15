@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
+  #resources :courses
+  #resources :subjects
+  #resources :instructors
+  get 'dataload/instructors'
+  get 'dataload/subjects'
+  get 'dataload/courses'
+  get 'sessions/new'
+  get 'sessions/destroy'
+  get 'instructors/index'
+  get 'subjects/index'
+  get 'courses/index'
+
   resources :users
+  get    '/login',   to: 'sessions#new', as: 'new_session_path'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
   root 'application#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

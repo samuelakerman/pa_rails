@@ -1,0 +1,15 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <head>Brandeis University course catalog - Rails App for COSI166b Samuel Akerman</head>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home",   '/' %></li>
+        <% if current_user.nil?%>
+          <li><%= link_to "Log in", '/sessions/new' %></li>
+        <% else%>
+          <li><%= link_to "Logout", '/sessions/destroy' %></li>
+        <% end%>
+      </ul>
+    </nav>
+  </div>
+</header>

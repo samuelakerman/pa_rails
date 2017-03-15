@@ -1,0 +1,53 @@
+class DataloadController < ApplicationController
+	def instructors
+		total_ins_start = Instructor.count
+		ins_array = JSON.parse File.read(Dir.pwd+"/db/instructor.json")
+		ins_array.each do |ins|
+			curr_ins = Instructor.new
+			curr_ins.fname = ins["first"]
+			curr_ins.lname = ins["last"]
+			curr_ins.email = ins["email"]
+			curr_ins.brandeis_id = ins["id"]
+			curr_ins.save
+		end
+		total_ins_end = Instructor.count
+		if (total_ins_end - total_ins_start) > 0
+			render html: "Instructors were created and saved to the database."
+		else
+			render html: "No instructors were created."
+		end
+	end
+	def subjects
+		total_subj_start = Subject.count
+		sub_array = JSON.parse File.read(Dir.pwd+"/db/subject.json")
+		sub_array.each do |subj|
+			curr_subj = Subject.new
+			curr_subj.brandeis_id = subj["id"]
+			curr_subj.name = subj["name"]
+			curr_subj.save
+		end
+		total_subj_end = Subject.count
+		if (total_subj_end - total_subj_start) > 0
+			render html: "Subjects were created and saved to the database."
+		else
+			render html: "No subjects were created."
+		end
+	end
+	def courses
+		total_course_start = Course.count
+		course_array = JSON.parse File.read(Dir.pwd+"/db/course.json")
+		course_array.each do |cour|
+			curr_course = Course.new
+			curr_course.brandeis_code = cour["code"]
+			curr_course.name = cour["name"]
+			curr_course.save
+		end
+		total_course_end = Course.count
+		if (total_course_end - total_course_start) > 0
+			render html: "Courses were created and saved to the database."
+		else
+			render html: "No courses were created."
+		end
+
+	end
+end
