@@ -1,10 +1,15 @@
 class InstructorsController < ApplicationController
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
+  include SessionsHelper
 
   # GET /instructors
   # GET /instructors.json
   def index
+    if session[:user_id].nil?
+      redirect_to '/', :flash => { :error => 'Please, log in or create an account to access the system.' }
+    else
     @instructors = Instructor.all
+    end
   end
 
   # GET /instructors/1

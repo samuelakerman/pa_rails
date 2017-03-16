@@ -3,4 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   def home
   end
+  def not_found
+  end
 end

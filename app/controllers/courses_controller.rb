@@ -4,7 +4,11 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    if session[:user_id].nil?
+      redirect_to '/', :flash => { :error => 'Please, log in or create an account to access the system.' }
+    else
+        @courses = Course.all
+    end
   end
 
   # GET /courses/1

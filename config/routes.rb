@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   get 'subjects/index'
   get 'courses/index'
 
+
   resources :users
   get    '/login',   to: 'sessions#new', as: 'new_session_path'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   root 'application#home'
+  get '*unmatched_route', to: 'application#not_found'
 end

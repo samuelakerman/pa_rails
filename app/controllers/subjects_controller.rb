@@ -4,7 +4,11 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    if session[:user_id].nil?
+      redirect_to '/', :flash => { :error => 'Please, log in or create an account to access the system.' }
+    else
+        @subjects = Subject.all
+    end
   end
 
   # GET /subjects/1

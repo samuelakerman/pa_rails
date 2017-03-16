@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if session[:user_id].nil?
+      redirect_to '/', :flash => { :error => 'Please, log in or create an account to access the system.' }
+    else
+        @users = User.all
+    end
   end
 
   # GET /users/1

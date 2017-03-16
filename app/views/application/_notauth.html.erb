@@ -1,10 +1,14 @@
+<% flash.each do |key, value| %>
+    <font color="red"><div class="flash <%= key %>"><%= value %></div></font>
+<% end %>
+
 <div>
   <body class="body">
   	<div class="container">
  	 <div class="jumbotron">
  	 	<h3>Welcome to the course catalog!</h3>
-		 <p> If you have an account, please <a <%= link_to 'log in', sessions_new_path %></a>. </p>
- 		 <p>Otherwise, create a <a <%= link_to 'new account', new_user_path  %></a> to access the catalog.</p>
+		 <p> If you have an account, please <u><a><%= link_to 'log in', sessions_new_path %></a></u>. </p>
+ 		 <p>Otherwise, create a <u><a> <%= link_to 'new account', new_user_path  %></a></u> to access the catalog.</p>
  	 </div>
  	</div>
   </body>
