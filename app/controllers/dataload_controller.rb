@@ -1,5 +1,6 @@
 class DataloadController < ApplicationController
 	def instructors
+		Instructor.delete_all
 		total_ins_start = Instructor.count
 		ins_array = JSON.parse File.read(Dir.pwd+"/db/instructor.json")
 		ins_array.each do |ins|
@@ -18,6 +19,7 @@ class DataloadController < ApplicationController
 		end
 	end
 	def subjects
+		Subject.delete_all
 		total_subj_start = Subject.count
 		sub_array = JSON.parse File.read(Dir.pwd+"/db/subject.json")
 		sub_array.each do |subj|
@@ -34,6 +36,7 @@ class DataloadController < ApplicationController
 		end
 	end
 	def courses
+		Course.delete_all
 		total_course_start = Course.count
 		course_array = JSON.parse File.read(Dir.pwd+"/db/course.json")
 		course_array.each do |cour|
