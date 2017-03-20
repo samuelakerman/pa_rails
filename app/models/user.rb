@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	has_many :enrollments
+	has_many :courses, through: :enrollments
 	validates :name, presence: true, length: { minimum: 2, maximum: 20 }
 	validates :last_name, presence: true, length: { minimum: 2, maximum: 20 }
 	validates :username, presence: true, length: { minimum: 2, maximum: 20 }
