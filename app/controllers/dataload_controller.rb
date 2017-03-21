@@ -38,6 +38,7 @@ class DataloadController < ApplicationController
 	def courses
 		Course.delete_all
 		total_course_start = Course.count
+		int = 0
 		course_array = JSON.parse File.read(Dir.pwd+"/db/course.json")
 		course_array.each do |cour|
 			curr_course = Course.new
@@ -58,6 +59,11 @@ class DataloadController < ApplicationController
 			end
 
 
+			int++
+			if int==1000
+				render html: "Still working...."
+				int=0
+			end
 
 		end
 
