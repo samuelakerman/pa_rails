@@ -44,7 +44,23 @@ class DataloadController < ApplicationController
 			curr_course.brandeis_code = cour["code"]
 			curr_course.name = cour["name"]
 			curr_course.save
+
+			#Subject.find_by(brandeis_id: chiapo[0]["subjects"][0]["id"]).id
+
+			cour["subjects"].each do |subject|
+				subj = CourseSubject.new
+				subj.course_id = curr_course.id
+				
+				if !Subject.find_by(brandeis_id: subject["id"]).nil?
+					subj.subject_id = Subject.find_by(brandeis_id: subject["id"]).id
+					subj.save
+				end
+			end
+
+
+
 		end
+
 		total_course_end = Course.count
 		if (total_course_end - total_course_start) > 0
 			render html: "Courses were created and saved to the database."
