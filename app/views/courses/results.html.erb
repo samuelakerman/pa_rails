@@ -8,19 +8,33 @@
       <th>ID</th>
       <th>Course name</th>
       <th>Brandeis ID</th>
+      <th>Check to enroll</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+    <%= form_for :course_selection, :url => {:controller=>'courses', :action=>'enroll'} do |f| %>
     <% @results.each do |result| %>
       <tr>
         <td><%= result.id %></td>
         <td><%= result.name %></td>
         <td><%= result.brandeis_code %></td>
+        <td class=center> <%= f.check_box result.id %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<div class="row">
+  <div class="col-sm-3">
 
-<br>
+  </div>
+  <div class="col-sm-3">
+    <div class="actions">
+    </div>
+  </div>
+  <div class="col-sm-3">
+  </div>
+</div>
+    <%= f.submit "Submit" %>
+ <% end %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'courses/index'
   get 'courses/search'
   post '/courses/search', to: 'courses#results'
+  post 'courses/results', to: 'courses#enroll'
 
   resources :users
   get    '/login',   to: 'sessions#new', as: 'new_session_path'

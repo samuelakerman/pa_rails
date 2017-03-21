@@ -43,6 +43,22 @@ class CoursesController < ApplicationController
     end
   end
 
+  def enroll
+    selection = params["course_selection"].to_a
+    @enrolled=[]
+    selection.each do |course|
+      if course[1]=="1"
+        course = Course.find_by(id: course[0])
+        enrollin = Enrollment.new
+        enrollin.course_id = course.id
+        enrollin.user_id = current_user.id
+        if enrollin.save
+          @enrolled[@enrolled.count] = course.name
+        end
+      end
+    end
+  end
+
   # POST /courses
   # POST /courses.json
   def create
