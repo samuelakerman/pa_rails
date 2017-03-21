@@ -25,6 +25,24 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  def search
+    if session[:user_id].nil?
+      redirect_to '/', :flash => { :error => 'Please, log in or create an account to access the system.' }
+    else
+       @subjects = Subject.all
+    end
+  end
+
+  def results
+    subject_id = params["search_criteria"]["subject_id"]
+    course_criteria = params["search_criteria"]["course_criteria"]
+    if subject_id.empty?
+      @results = Course.where('name LIKE ?', '%' + course_criteria + '%')
+    else
+      @results = Subject.find_by(id: subject_id).courses.where('name LIKE ?', '%' + course_criteria + '%')
+    end
+  end
+
   # POST /courses
   # POST /courses.json
   def create

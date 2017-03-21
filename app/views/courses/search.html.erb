@@ -1,0 +1,36 @@
+<h1>Course search</h1>
+
+<h3>Please, provide the course information you are interested in. You can also select a subject for more precise results.</h3>
+
+<%= form_for :search_criteria do |f| %>
+<div class="row">
+
+	<div class="col-sm-4">
+		<div class="field">
+			<%= f.label :"List of subjects:" %><br />
+			<%= f.collection_select(:subject_id, @subjects, :id, :name, :include_blank => "No subject selection") %>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div>
+			<%= f.label :course_criteria %>
+			<%= f.text_field :course_criteria, class: 'form-control' %>
+		</div>
+	</div>	
+</div>
+<div class="row">
+</div>
+
+<div class="row">
+	<div class="col-sm-3">
+	<%= f.submit "Submit" %>
+	</div>
+	<div class="col-sm-3">
+		<div class="actions">
+		</div>
+	</div>
+	<div class="col-sm-3">
+	</div>
+</div>
+<% end %>
