@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'subjects/index'
   get 'courses/index'
   get 'courses/search'
+  get 'courses/resultsjson'
+  get 'courses/enrollajax'
   post '/courses/search', to: 'courses#results'
   post 'courses/results', to: 'courses#enroll'
 

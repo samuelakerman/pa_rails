@@ -43,6 +43,19 @@ class CoursesController < ApplicationController
     end
   end
 
+  def resultsjson
+    subject_id = params["subject_id"]
+    course_criteria = params["course_criteria"]
+    if subject_id.nil?
+      @results = Course.where('name LIKE ?', '%' + course_criteria + '%')
+    elsif course_criteria.nil?
+      @results = Subject.find_by(id: subject_id).courses
+    else
+      @results = Subject.find_by(id: subject_id).courses.where('name LIKE ?', '%' + course_criteria + '%')
+    end
+    render :json => @results
+  end
+
   def enroll
     selection = params["course_selection"].to_a
     @enrolled=[]
@@ -56,6 +69,34 @@ class CoursesController < ApplicationController
           @enrolled[@enrolled.count] = course.name
         end
       end
+    end
+  end
+
+  def enrollajax
+    course = Course.find_by(id: params.to_a[0][0])
+    enrollin = Enrollment.new
+    enrollin.course_id = course.id
+    enrollin.user_id = current_user.id
+
+    users_courses = User.find_by(id: current_user.id).courses
+
+    test = false
+    users_courses.each do |x|
+      if x.id == course.id
+        test =true
+        break
+      end
+    end
+    if test==true
+      render :json => ["course already enrolled"]
+      return
+    end
+
+    if enrollin.save
+      render :json => ["success"]
+      return
+    else
+      render :json => ["failure"]
     end
   end
 

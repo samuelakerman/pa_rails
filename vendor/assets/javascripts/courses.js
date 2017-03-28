@@ -1,69 +1,3 @@
-<%= javascript_include_tag "courses" %>
-<%= javascript_include_tag "application" %>
-
-
-<h1>Course search</h1>
-
-<h3>Please, provide the course information you are interested in. You can also select a subject for more precise results.</h3>
-
-<div style="text-align:center; color:red"><strong id="alert_message"><font size="3" color="red"></font></strong></div>
-
-<%= form_for :search_criteria do |f| %>
-<div class="row">
-
-	<div class="col-sm-4">
-		<div class="field">
-			<%= f.label :"List of subjects:" %><br />
-			<%= f.collection_select(:subject_id, @subjects, :id, :name, {:include_blank => "No subject selection", :selected => @subjects.name},{:id=>"select_subject"}) %>
-		</div>
-	</div>
-
-	<div class="col-sm-4">
-		<div>
-			<%= f.label :course_criteria %>
-			<%= f.text_field :course_criteria, :id => "search_text",class: 'form-control' %>
-		</div>
-	</div>	
-</div>
-<% end %>
-
-<div class="container-fluid">
-	<div class="row">
-		<div  class="col-md-12">
-			<table>
-				<thead>
-					<tr style="text-align:center">
-						<th>ID</th>
-						<th>Course name</th>
-						<th>Brandeis ID</th>
-						<th>Check to enroll</th>
-						<th colspan="3"></th>
-					</tr>
-				</thead>
-
-				<tbody id="course_table">
-					<tr>
-					</tr>
-				</tbody>
-			</table>
-			<div class="row">
-				<div class="col-sm-3">
-
-				</div>
-				<div class="col-sm-3">
-					<div class="actions">
-					</div>
-				</div>
-				<div class="col-sm-3">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
-<script>
 var text_box = document.getElementById("search_text");
 var subject_list = document.getElementById("select_subject");
 //var input = document.getElementById("course_table").getElementsByTagName('input');
@@ -180,4 +114,3 @@ function enroll(){
 				cell4.appendChild(objInputCheckBox);
 		}
 	}
-</script>
