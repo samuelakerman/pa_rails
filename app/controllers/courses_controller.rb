@@ -37,9 +37,9 @@ class CoursesController < ApplicationController
     subject_id = params["search_criteria"]["subject_id"]
     course_criteria = params["search_criteria"]["course_criteria"]
     if subject_id.empty?
-      @results = Course.where('name LIKE ?', '%' + course_criteria + '%')
+      @results = Course.where('lower(name) LIKE ?', '%' + course_criteria + '%')
     else
-      @results = Subject.find_by(id: subject_id).courses.where('name LIKE ?', '%' + course_criteria + '%')
+      @results = Subject.find_by(id: subject_id).courses.where('lower(name) LIKE ?', '%' + course_criteria + '%')
     end
   end
 
@@ -51,7 +51,7 @@ class CoursesController < ApplicationController
     elsif course_criteria.nil?
       @results = Subject.find_by(id: subject_id).courses
     else
-      @results = Subject.find_by(id: subject_id).courses.where('name LIKE ?', '%' + course_criteria + '%')
+      @results = Subject.find_by(id: subject_id).courses.where('lower(name) LIKE ?', '%' + course_criteria + '%')
     end
     render :json => @results
   end
