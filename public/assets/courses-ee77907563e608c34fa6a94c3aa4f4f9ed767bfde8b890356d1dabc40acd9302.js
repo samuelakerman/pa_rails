@@ -114,3 +114,4 @@ function enroll(){
 				cell4.appendChild(objInputCheckBox);
 		}
 	}
+;
