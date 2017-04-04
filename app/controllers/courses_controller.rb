@@ -47,8 +47,7 @@ class CoursesController < ApplicationController
     subject_id = params["subject_id"]
     course_criteria = params["course_criteria"]
     if subject_id.nil?
-      @results = Course.where('name LIKE ?', '%' + course_criteria + '%')
-      
+      @results = Course.where('lower(name) LIKE ?', '%' + course_criteria + '%')
     elsif course_criteria.nil?
       @results = Subject.find_by(id: subject_id).courses
     else
